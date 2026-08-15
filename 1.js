@@ -46,6 +46,6 @@ app.post("/posts/new", (req, res)=>{
 
 app.get("/posts/:id", (req, res)=>{
     let {id}= req.params;
-    let single= posts.find((p)=>{ id===p.id});
-    res.render("single.ejs", {single});
+    let s= posts.find((p)=>{ id===p.id});
+    res.render("single.ejs", {s});
 });
