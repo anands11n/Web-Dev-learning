@@ -7,18 +7,19 @@ let port=8080;
 
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "./ejs-render/"));
+const {v4 : uuidv4}= require("uuid");
 
 app.use(express.static(path.join(__dirname, "ejs-render/static-files/")));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 let posts= [{  
-            id: "a",
+            id: uuidv4(),
             username: "anand",
             post: "i like pink oranges"
         }, 
         {   
-            id: "b",
+            id: uuidv4(),
             username: "kunal", 
             post: "i like ravi kissan jokes!"
         },
@@ -39,13 +40,24 @@ app.get("/posts/new", (req, res)=>{
 });
 
 app.post("/posts/new", (req, res)=>{
+    let id= uuidv4();
     let {user, post}= req.body;
-    posts.push({user, post});
+    posts.push({id, user, post});
     res.redirect("http://localhost:8080/posts/");
 });
 
 app.get("/posts/:id", (req, res)=>{
     let {id}= req.params;
-    let s= posts.find((p)=>{ id===p.id});
+    let s= posts.find((p)=> id===p.id);
     res.render("single.ejs", {s});
+});
+
+app.patch("/posts/:id", (req, res)=>{
+    let {id}= req.params;
+    
+});
+
+app.get("posts/:id/new", (req, res)=>{
+    let {id}= req.params;
+    res.render("edited.ejs", {id});
 });
