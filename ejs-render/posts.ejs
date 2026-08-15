@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Posts</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Quora Posts</h1>
+    <% for(data of db){ %>
+        <div class="box">
+            <h3>user: @<%=data.username%></h3>
+            <h4>post: <%=data.post%></h4>
+        </div>
+    <% } %>
+    <form method="get" action="http://localhost:8080/posts/new">
+        <button type="submit"><a href="http://localhost:8080/posts/new">Write a new post</a></button>
+    </form>
+</body>
+</html>
