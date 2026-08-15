@@ -25,7 +25,7 @@ let posts= [{
             id: uuidv4(),
             username: "kunal", 
             post: "i like ravi kissan jokes!"
-        },
+        }
 ];
 
 
@@ -43,10 +43,15 @@ app.get("/posts/new", (req, res)=>{
 });
 
 app.post("/posts/new", (req, res)=>{
-    let id= uuidv4();
-    let {user, post}= req.body;
-    posts.push({id, user, post});
-    res.redirect("http://localhost:8080/posts/");
+    let id = uuidv4();
+    let {username, post} = req.body;
+    posts.push({
+        id,
+        username,
+        post
+    });
+
+    res.redirect("/posts");
 });
 
 app.get("/posts/:id", (req, res)=>{
@@ -55,13 +60,31 @@ app.get("/posts/:id", (req, res)=>{
     res.render("single.ejs", {s});
 });
 
-app.patch("/posts/:id", (req, res)=>{
-    let {id}= req.params;
-    
-});
 
-app.get("posts/:id/edit", (req, res)=>{
+
+app.patch("/posts/:id/edit", (req, res) => {
+    let {id} = req.params;
+
+
+    let sel = posts.find((p) => id === p.id);
+
+
+    let t = req.body.tt;
+    sel.post = t;
+
+    res.redirect("/posts");
+});
+app.get("/posts/:id/edit", (req, res)=>{
     let {id}= req.params;
     let ost= posts.find((p)=> id===p.id);
     res.render("edited.ejs", {ost});
+});
+
+
+
+app.delete("/posts/:id", (req, res)=>{
+    let {id}= req.params;
+    posts= posts.filter((p)=> id!=p.id);
+    res.redirect("/posts");
+
 });

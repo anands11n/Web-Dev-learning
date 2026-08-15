@@ -6,8 +6,8 @@
     <title>Edited form</title>
 </head>
 <body>
-    <form method="patch" action="https://localhost:8080/posts<%=ost.id%>?_method=patch">
-        <textarea><%=ost.post</textarea>
+    <form method="post" action="http://localhost:8080/posts/<%=ost.id%>/edit?_method=patch">
+        <textarea name="tt"><%=ost.post%></textarea>
         <button>Submit</button>
     </form>
 </body>

@@ -13,9 +13,14 @@
             <h3>user: @<%=data.username%></h3>
             <h4>post: <%=data.post%></h4>
             <a href="http://localhost:8080/posts/<%=data.id%>">see in detail</a>
-            <a href="http://localhost:8080/posts/<%=data.id%>/new">edit post</a>
+            <a href="http://localhost:8080/posts/<%=data.id%>/edit">edit post</a>
+            <form method="post" action="posts/<%=data.id%>?_method=delete">
+                <button>Delete</button>
+            </form>
+            
         </div>
         
     <% } %>
+    <a href="http://localhost:8080/posts/new">new </a>
 </body>
 </html>
