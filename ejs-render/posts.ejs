@@ -13,12 +13,9 @@
             <h3>user: @<%=data.username%></h3>
             <h4>post: <%=data.post%></h4>
             <a href="http://localhost:8080/posts/<%=data.id%>">see in detail</a>
-            <a href="http://localhost:8080/posts/<%=data.id%>/new">see in detail</a>
+            <a href="http://localhost:8080/posts/<%=data.id%>/new">edit post</a>
         </div>
         
     <% } %>
-    <form method="get" action="http://localhost:8080/posts/new">
-    <a href="http://localhost:8080/posts/new">Write a new post</a>
-    </form>
 </body>
 </html>

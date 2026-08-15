@@ -12,6 +12,9 @@ const {v4 : uuidv4}= require("uuid");
 app.use(express.static(path.join(__dirname, "ejs-render/static-files/")));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+const methodOverride = require("method-override");
+app.use(methodOverride("_method"));
+
 
 let posts= [{  
             id: uuidv4(),
@@ -57,7 +60,8 @@ app.patch("/posts/:id", (req, res)=>{
     
 });
 
-app.get("posts/:id/new", (req, res)=>{
+app.get("posts/:id/edit", (req, res)=>{
     let {id}= req.params;
-    res.render("edited.ejs", {id});
+    let ost= posts.find((p)=> id===p.id);
+    res.render("edited.ejs", {ost});
 });
