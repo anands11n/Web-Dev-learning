@@ -12,11 +12,13 @@ app.use(express.static(path.join(__dirname, "ejs-render/static-files/")));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-let db= [{  
+let posts= [{  
+            id: "a",
             username: "anand",
             post: "i like pink oranges"
         }, 
         {   
+            id: "b",
             username: "kunal", 
             post: "i like ravi kissan jokes!"
         },
@@ -29,7 +31,7 @@ app.listen(port, ()=>{
 
 
 app.get("/posts", (req, res)=>{
-    res.render("posts", {db});
+    res.render("posts", {posts});
 });
 
 app.get("/posts/new", (req, res)=>{
@@ -38,6 +40,12 @@ app.get("/posts/new", (req, res)=>{
 
 app.post("/posts/new", (req, res)=>{
     let {user, post}= req.body;
-    db.push({user, post});
+    posts.push({user, post});
     res.redirect("http://localhost:8080/posts/");
+});
+
+app.get("/posts/:id", (req, res)=>{
+    let {id}= req.params;
+    let single= posts.find((id)=>{ console.log("found")});
+    res.render("single.ejs", {single});
 });
