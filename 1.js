@@ -10,6 +10,7 @@ app.set("views", path.join(__dirname, "./ejs-render/"));
 
 app.use(express.static(path.join(__dirname, "ejs-render/static-files/")));
 app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
 let db= [{  
             username: "anand",
@@ -36,7 +37,7 @@ app.get("/posts/new", (req, res)=>{
 });
 
 app.post("/posts/new", (req, res)=>{
-    let {user, post}= req.query;
-    console.log(user, post);
+    let {user, post}= req.body;
+    db.push({user, post});
     res.redirect("http://localhost:8080/posts/");
 });
